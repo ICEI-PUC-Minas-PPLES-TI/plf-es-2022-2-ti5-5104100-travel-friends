@@ -14,6 +14,8 @@ app.use(
 
 app.use(express.json());
 
+const port = process.env.PORT || 3000;
+
 const roadMapRoutes = require("./routes/roadMapRoutes");
 const User = require("./models/User");
 
@@ -152,7 +154,7 @@ mongoose
 
   .then(() => {
     console.log("Conectado ao banco de dados");
-    app.listen(3000);
+    app.listen(port);
   })
 
   .catch((err) => console.log(err));
