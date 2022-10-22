@@ -5,15 +5,16 @@ const RoadMap = require("../models/RoadMap");
 //criação de dados
 router.post("/", async (req, res) => {
   const {
+    idCreator,
+    idLocal,
     title,
-    description,
-    limitPerson,
-    sponsor,
-    dataStart,
-    dataEnd,
-    dataImage,
-    guide,
     isFree,
+    price,
+    type,
+    person,
+    start,
+    end,
+    participants,
   } = req.body;
 
   if (!title) {
@@ -22,15 +23,16 @@ router.post("/", async (req, res) => {
   }
 
   const roadmap = {
+    idCreator,
+    idLocal,
     title,
-    description,
-    limitPerson,
-    sponsor,
-    dataStart,
-    dataEnd,
-    dataImage,
-    guide,
     isFree,
+    price,
+    type,
+    person,
+    start,
+    end,
+    participants,
   };
 
   try {
@@ -74,27 +76,29 @@ router.patch("/:id", async (req, res) => {
   const id = req.params.id;
 
   const {
+    idCreator,
+    idLocal,
     title,
-    description,
-    limitPerson,
-    sponsor,
-    dataStart,
-    dataEnd,
-    dataImage,
-    guide,
     isFree,
+    price,
+    type,
+    person,
+    start,
+    end,
+    participants,
   } = req.body;
 
   const roadmap = {
+    idCreator,
+    idLocal,
     title,
-    description,
-    limitPerson,
-    sponsor,
-    dataStart,
-    dataEnd,
-    dataImage,
-    guide,
     isFree,
+    price,
+    type,
+    person,
+    start,
+    end,
+    participants,
   };
 
   try {

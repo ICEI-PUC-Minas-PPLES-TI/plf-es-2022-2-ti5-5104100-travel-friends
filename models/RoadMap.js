@@ -1,31 +1,20 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const RoadMap = mongoose.model('RoadMap', {
-    title: String,
-    description: String,
-    limitPerson: Number,
-    sponsor: String,
-    dataStart: Date,
-    dataEnd: Date,
-    dataImage:[
-        {
-            0: String,
-            1: String,
-            2: String,
-        }
-    ],
-    guide:[
-        {
-            title: String,
-            description: String,
-            hours: Date,
-        },{
-            title: String,
-            description: String,
-            hours: Date,
-        }
-    ],
-    isFree: Boolean,
-})
+const RoadMap = mongoose.model("RoadMap", {
+  idCreator: String,
+  idLocal: String,
+  title: String,
+  isFree: Boolean,
+  price: Number,
+  type: String,
+  person: Number,
+  start: String,
+  end: String,
+  participants: [
+    {
+      idUser: String,
+    },
+  ],
+});
 
-module.exports = RoadMap
+module.exports = RoadMap;

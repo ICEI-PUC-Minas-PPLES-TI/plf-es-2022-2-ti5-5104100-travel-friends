@@ -17,9 +17,11 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 const roadMapRoutes = require("./routes/roadMapRoutes");
+const localRoutes = require("./routes/localRoutes");
 const User = require("./models/User");
 
 app.use("/roadmap", roadMapRoutes);
+app.use("/local", localRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Api Funcionando" });
@@ -57,7 +59,7 @@ function checkToken(req, res, next) {
 }
 
 app.post("/auth/register", async (req, res) => {
-  const { name, email, password, confirmPassword } = req.body;
+  const { name, email, cpf, password, confirmPassword } = req.body;
 
   if (!name) {
     return res.status(422).json({ error: "Por favor, insira seu nome!" });
@@ -65,14 +67,11 @@ app.post("/auth/register", async (req, res) => {
   if (!email) {
     return res.status(422).json({ error: "Por favor, insira seu email!" });
   }
+  if (!cpf) {
+    return res.status(422).json({ error: "Por favor, insira seu cpf!" });
+  }
   if (!password) {
     return res.status(422).json({ error: "Por favor, insira sua senha!" });
-  }
-  if (!confirmPassword) {
-    return res.status(422).json({ error: "Por favor, confirme sua senha!" });
-  }
-  if (password !== confirmPassword) {
-    return res.status(422).json({ error: "As senhas não são iguais!" });
   }
 
   const userExists = await User.findOne({ email: email });
@@ -87,6 +86,7 @@ app.post("/auth/register", async (req, res) => {
   const user = new User({
     name,
     email,
+    cpf,
     password: passwordHash,
   });
 
