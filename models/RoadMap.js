@@ -4,6 +4,7 @@ const RoadMap = mongoose.model("RoadMap", {
   idCreator: String,
   idLocal: String,
   title: String,
+  description: String,
   isFree: Boolean,
   price: Number,
   type: String,
