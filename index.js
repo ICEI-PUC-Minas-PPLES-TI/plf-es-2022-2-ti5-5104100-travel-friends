@@ -18,10 +18,12 @@ const port = process.env.PORT || 3000;
 
 const roadMapRoutes = require("./routes/roadMapRoutes");
 const localRoutes = require("./routes/localRoutes");
+const userRoutes = require("./routes/userRoutes");
 const User = require("./models/User");
 
 app.use("/roadmap", roadMapRoutes);
 app.use("/local", localRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Api Funcionando" });
@@ -59,7 +61,7 @@ function checkToken(req, res, next) {
 }
 
 app.post("/auth/register", async (req, res) => {
-  const { name, email, cpf, password, confirmPassword } = req.body;
+  const { name, email, cpf, password } = req.body;
 
   if (!name) {
     return res.status(422).json({ error: "Por favor, insira seu nome!" });
