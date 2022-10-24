@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const Local = mongoose.model("Local", {
+  idCreator: String,
   name: String,
   address: String,
   cep: String,
