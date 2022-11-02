@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const app = express();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const cors = require("cors");
 
 require("dotenv").config();
 
@@ -12,14 +11,6 @@ app.use(
     extended: true,
   })
 );
-
-app.use((req, res, next) => {
-  //Qual site tem permissão de realizar a conexão
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  //Quais são os métodos que a conexão pode realizar na API
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH");
-  app.use(cors());
-});
 
 app.use(express.json());
 
