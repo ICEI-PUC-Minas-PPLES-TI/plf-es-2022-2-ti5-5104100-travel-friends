@@ -136,9 +136,14 @@ app.post("/auth/login", async (req, res) => {
       secret
     );
 
-    res
-      .status(200)
-      .json({ message: "Autentificação realizada com sucesso!", token });
+    res.status(200).json({
+      message: "Autentificação realizada com sucesso!",
+      token,
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      cpf: user.cpf,
+    });
   } catch (error) {
     console.log(error);
 
