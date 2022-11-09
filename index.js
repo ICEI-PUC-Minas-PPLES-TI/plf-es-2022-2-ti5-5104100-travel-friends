@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -13,6 +14,13 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE, PATCH");
+  app.use(cors());
+  next();
+});
 
 const port = process.env.PORT || 3000;
 
