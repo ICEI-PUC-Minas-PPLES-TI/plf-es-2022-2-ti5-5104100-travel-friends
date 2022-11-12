@@ -76,6 +76,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//Atualizar Roteiro
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -113,6 +114,30 @@ router.patch("/:id", async (req, res) => {
     const updatedRoadMap = await RoadMap.updateOne({ _id: id }, roadmap);
 
     if (updatedRoadMap.matchedCount === 0) {
+      res.status(422).json({ message: "Roteiro não encontrado" });
+      return;
+    }
+
+    res.status(200).json(roadmap);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
+//atualizar Favoritos de um Roteiro
+router.patch("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const { favorites } = req.body;
+
+  const roadmap = {
+    favorites,
+  };
+
+  try {
+    const updatedFavorites = await RoadMap.updateOne({ _id: id }, roadmap);
+
+    if (updatedFavorites.matchedCount === 0) {
       res.status(422).json({ message: "Roteiro não encontrado" });
       return;
     }

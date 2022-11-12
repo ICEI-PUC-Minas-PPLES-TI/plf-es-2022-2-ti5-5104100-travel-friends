@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 
@@ -18,8 +19,11 @@ router.patch("/:email", async (req, res) => {
 
   const { password } = req.body;
 
+  const salt = await bcrypt.genSalt(12);
+  const passwordHash = await bcrypt.hash(password, salt);
+
   const user = {
-    password,
+    password: passwordHash,
   };
 
   try {
