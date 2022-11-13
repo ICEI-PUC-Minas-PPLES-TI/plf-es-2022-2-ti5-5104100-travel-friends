@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE, PATCH");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH");
   app.use(cors());
   next();
 });
