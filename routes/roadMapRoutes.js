@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const RoadMap = require("../models/RoadMap");
 
-//criação de dados
+//criação de Roteiro
 router.post("/", async (req, res) => {
   const {
     idCreator,
@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-//leitura de dados
+//Retornar todos os Roteiros
 router.get("/", async (req, res) => {
   try {
     const roadmaps = await RoadMap.find();
@@ -59,6 +59,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Retornar um Roteiro por Id
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -148,6 +149,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+//Apagar um Roteiro
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
