@@ -4,7 +4,8 @@ const Local = require("../models/Local");
 
 //criação de dados
 router.post("/", async (req, res) => {
-  const { idCreator, name, address, cep, openTime, closeTime } = req.body;
+  const { idCreator, name, address, cep, openTime, closeTime, location } =
+    req.body;
 
   if (!name) {
     res.status(422).json({ error: "O nome é obrigatório" });
@@ -25,6 +26,7 @@ router.post("/", async (req, res) => {
     cep,
     openTime,
     closeTime,
+    location,
   };
 
   try {
@@ -67,7 +69,8 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
 
-  const { idCreator, name, address, cep, openTime, closeTime } = req.body;
+  const { idCreator, name, address, cep, openTime, closeTime, location } =
+    req.body;
 
   const local = {
     idCreator,
@@ -76,6 +79,7 @@ router.patch("/:id", async (req, res) => {
     cep,
     openTime,
     closeTime,
+    location,
   };
 
   try {

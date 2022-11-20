@@ -7,6 +7,10 @@ const Local = mongoose.model("Local", {
   cep: String,
   openTime: String,
   closeTime: String,
+  location: {
+    lat: Number,
+    lng: Number,
+  },
 });
 
 module.exports = Local;
