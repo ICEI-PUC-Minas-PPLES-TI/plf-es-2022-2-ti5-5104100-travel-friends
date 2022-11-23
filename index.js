@@ -199,9 +199,4 @@ mongoose
     `mongodb+srv://${dbUser}:${dbPassword}@apicluster.1nigmuz.mongodb.net/?retryWrites=true&w=majority`
   )
 
-  .then(() => {
-    console.log("Conectado ao banco de dados");
-    app.listen(port);
-  })
-
   .catch((err) => console.log(err));
