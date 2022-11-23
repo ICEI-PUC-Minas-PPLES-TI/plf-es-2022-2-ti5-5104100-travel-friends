@@ -50,11 +50,11 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3001, () => {
+const port = process.env.PORT || 3001;
+
+server.listen(port, () => {
   console.log("Server rodando na porta 3001");
 });
-
-const port = process.env.PORT || 3000;
 
 const roadMapRoutes = require("./routes/roadMapRoutes");
 const localRoutes = require("./routes/localRoutes");
