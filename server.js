@@ -1,30 +1,73 @@
-const express = require("express");
-const path = require("path");
+var app = require("express")();
+var http = require("http").createServer(app);
+const PORT = 3334;
+var io = require("socket.io")(http);
+var STATIC_CHANNELS = [
+  {
+    name: "Chat",
+    participants: 0,
+    id: 1,
+    sockets: [],
+  },
+  {
+    name: "Cool",
+    participants: 0,
+    id: 2,
+    sockets: [],
+  },
+];
 
-const app = express();
-const server = require("http").createServer(app);
-const io = require("socket.io")(server);
-
-app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join(__dirname, "public"));
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
-
-app.use("/", (req, res) => {
-  res.render("index.html");
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
 });
 
-let messages = [];
+http.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`);
+});
 
 io.on("connection", (socket) => {
-  console.log(`Socket conectado: ${socket.id}`);
+  console.log("new client connected");
+  socket.emit("connection", null);
+  socket.on("channel-join", (id) => {
+    console.log("channel join", id);
+    STATIC_CHANNELS.forEach((c) => {
+      if (c.id === id) {
+        if (c.sockets.indexOf(socket.id) == -1) {
+          c.sockets.push(socket.id);
+          c.participants++;
+          io.emit("channel", c);
+        }
+      } else {
+        let index = c.sockets.indexOf(socket.id);
+        if (index != -1) {
+          c.sockets.splice(index, 1);
+          c.participants--;
+          io.emit("channel", c);
+        }
+      }
+    });
 
-  socket.emit("previousMessages", messages);
+    return id;
+  });
+  socket.on("send-message", (message) => {
+    io.emit("message", message);
+  });
 
-  socket.on("sendMessage", (data) => {
-    messages.push(data);
-    socket.broadcast.emit("receivedMessage", data);
+  socket.on("disconnect", () => {
+    STATIC_CHANNELS.forEach((c) => {
+      let index = c.sockets.indexOf(socket.id);
+      if (index != -1) {
+        c.sockets.splice(index, 1);
+        c.participants--;
+        io.emit("channel", c);
+      }
+    });
   });
 });
 
-server.listen(3000);
+app.get("/getChannels", (req, res) => {
+  res.json({
+    channels: STATIC_CHANNELS,
+  });
+});
