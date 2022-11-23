@@ -1,6 +1,6 @@
 var app = require("express")();
 var http = require("http").createServer(app);
-const PORT = 3334;
+const port = process.env.PORT || 3334;
 var io = require("socket.io")(http);
 var STATIC_CHANNELS = [
   {
