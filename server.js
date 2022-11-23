@@ -1,73 +1,48 @@
-var app = require("express")();
-var http = require("http").createServer(app);
-const port = process.env.PORT || 3334;
-var io = require("socket.io")(http);
-var STATIC_CHANNELS = [
-  {
-    name: "Chat",
-    participants: 0,
-    id: 1,
-    sockets: [],
-  },
-  {
-    name: "Cool",
-    participants: 0,
-    id: 2,
-    sockets: [],
-  },
-];
+const webSocketsServerPort = 3334;
+const webSocketServer = require("websocket").server;
+const http = require("http");
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  next();
+const server = http.createServer();
+server.listen(webSocketsServerPort);
+console.log("listening on port 8000");
+
+const wsServer = new webSocketServer({
+  httpServer: server,
 });
 
-http.listen(PORT, () => {
-  console.log(`listening on *:${PORT}`);
-});
+const clients = {};
 
-io.on("connection", (socket) => {
-  console.log("new client connected");
-  socket.emit("connection", null);
-  socket.on("channel-join", (id) => {
-    console.log("channel join", id);
-    STATIC_CHANNELS.forEach((c) => {
-      if (c.id === id) {
-        if (c.sockets.indexOf(socket.id) == -1) {
-          c.sockets.push(socket.id);
-          c.participants++;
-          io.emit("channel", c);
-        }
-      } else {
-        let index = c.sockets.indexOf(socket.id);
-        if (index != -1) {
-          c.sockets.splice(index, 1);
-          c.participants--;
-          io.emit("channel", c);
-        }
+const getUniqueID = () => {
+  const s4 = () =>
+    Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  return s4() + s4() + "-" + s4();
+};
+
+wsServer.on("request", function (request) {
+  var userID = getUniqueID();
+  console.log(
+    new Date() +
+      " Recieved a new connection from origin " +
+      request.origin +
+      "."
+  );
+
+  const connection = request.accept(null, request.origin);
+  clients[userID] = connection;
+  console.log(
+    "connected: " + userID + " in " + Object.getOwnPropertyNames(clients)
+  );
+
+  connection.on("message", function (message) {
+    if (message.type === "utf8") {
+      console.log("Received Message: ", message.utf8Data);
+
+      for (key in clients) {
+        clients[key].sendUTF(message.utf8Data);
+        console.log("sent Message to: ", clients[key]);
       }
-    });
-
-    return id;
-  });
-  socket.on("send-message", (message) => {
-    io.emit("message", message);
-  });
-
-  socket.on("disconnect", () => {
-    STATIC_CHANNELS.forEach((c) => {
-      let index = c.sockets.indexOf(socket.id);
-      if (index != -1) {
-        c.sockets.splice(index, 1);
-        c.participants--;
-        io.emit("channel", c);
-      }
-    });
-  });
-});
-
-app.get("/getChannels", (req, res) => {
-  res.json({
-    channels: STATIC_CHANNELS,
+    }
   });
 });
