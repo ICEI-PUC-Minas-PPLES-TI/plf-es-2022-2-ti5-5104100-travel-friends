@@ -5,7 +5,6 @@ const app = express();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const http = require("http");
-const { Server } = require("socket.io");
 
 require("dotenv").config();
 
@@ -24,37 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const server = http.createServer(app);
-
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log(`Usuário conectado: ${socket.id}`);
-
-  socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`Usuário com ID: ${socket.id} entrou na sala: ${data}`);
-  });
-
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("Usuário desconectado", socket.id);
-  });
-});
-
-const port = process.env.PORT || 3001;
-
-server.listen(port, () => {
-  console.log("Server rodando na porta 3001");
-});
+const port = process.env.PORT || 3000;
 
 const roadMapRoutes = require("./routes/roadMapRoutes");
 const localRoutes = require("./routes/localRoutes");
@@ -198,5 +167,10 @@ mongoose
   .connect(
     `mongodb+srv://${dbUser}:${dbPassword}@apicluster.1nigmuz.mongodb.net/?retryWrites=true&w=majority`
   )
+
+  .then(() => {
+    console.log("Conectado ao banco de dados");
+    app.listen(port);
+  })
 
   .catch((err) => console.log(err));
