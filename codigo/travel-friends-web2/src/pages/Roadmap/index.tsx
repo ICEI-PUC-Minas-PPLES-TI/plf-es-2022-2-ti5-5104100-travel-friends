@@ -143,7 +143,7 @@ const Roadmap = () => {
                     </Button>
                 </Form>
                 </Col>
-                {/* <Col lg={4}>
+                <Col lg={4}>
                 <BoxContent>
                     <ListGroup variant="flush">
                     {places?.map((item) => (
@@ -161,7 +161,7 @@ const Roadmap = () => {
                     </ListGroup>
                     
                 </BoxContent>
-                </Col> */}
+                </Col>
             </Row>
         </Container>
       </Navigation>
