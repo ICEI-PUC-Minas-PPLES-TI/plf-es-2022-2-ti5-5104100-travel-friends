@@ -7,7 +7,6 @@ import Roadmap from "./pages/Roadmap";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Place from './pages/Place';
-import Chat from './components/Chat/client';
 import FormPlace from "./pages/Place/FormPlace";
 import ChatReal from "./components/ChatReal";
 
@@ -17,10 +16,7 @@ function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={
-          // <ChatReal />
-          <Chat />
-          } />
+        <Route path="/" element={<SignIn />} />
         <Route path="/painel" element={<Home />} />
         <Route path="/reset" element={<ResertPassword />} />
         <Route index path="/entrar" element={<SignIn />} />

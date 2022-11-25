@@ -9,6 +9,7 @@ export const styles = {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: '40px',
+        backgroundColor: 'white',
         // Size
         width: '80px',
         height: '80px',
