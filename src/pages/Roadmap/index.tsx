@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigation } from '../../components';
-import { Container, Card, Row,Col, Form, Button, ListGroup } from 'react-bootstrap';
+import { Container, Card, Row,Col, Form, Button, ListGroup, FormGroup } from 'react-bootstrap';
 import { Local, RoadMap, TRoadmaps } from '../../@types/models.interface';
 import InputTime from '../../components/InputTime/InputTime';
 import { BoxContent } from './roadmap.styled';
@@ -11,7 +11,8 @@ import { createRoadmap } from '../../services/api/Requests/roadmap';
 const Roadmap = () => {
     const [values, setValues] = useState<RoadMap>({} as RoadMap);
     const [validated, setValidated] = useState(false);
-    const [places, setPlaces] = useState<Local[]>();
+    const [places, setPlaces] = useState<Local[]>([]);
+    const [selectOption,setSelectOption] = useState<string[]>();
 
     const TypeR: TRoadmaps = {
         restaurante: 'restaurante',
@@ -138,29 +139,20 @@ const Roadmap = () => {
                             />
                         </Form.Group>
                     </Row>
+                    {places && <FormGroup className='mb-3'>
+                        <Form.Label>Ponto de encontro</Form.Label>
+                        <Form.Select>
+                            {places?.map((item: Local) => { 
+                                return(
+                                    <option>{item.name} - {item.address}</option>
+                                );}
+                            )}
+                        </Form.Select>
+                    </FormGroup>}
                     <Button variant="success" type="submit">
                         Cadastrar Passeio
                     </Button>
                 </Form>
-                </Col>
-                <Col lg={4}>
-                <BoxContent>
-                    <ListGroup variant="flush">
-                    {places?.map((item) => (
-                        <ListGroup.Item>
-                        <Form.Check 
-                            type='checkbox'
-                            id={item._id}
-                            label={item.name}
-                            value={item._id}
-                            onChange={(e) => console.log(e.target.value)}
-                            />
-                            <p className='small text-muted'>{item.address}</p>
-                        </ListGroup.Item>
-                    ))}
-                    </ListGroup>
-                    
-                </BoxContent>
                 </Col>
             </Row>
         </Container>

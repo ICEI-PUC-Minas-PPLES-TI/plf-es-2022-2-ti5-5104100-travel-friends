@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Row, Col,Form, Figure, Alert } from 'react-bootstrap';
+import { Container, Row, Col,Form, Figure, Alert, Spinner } from 'react-bootstrap';
 import { ContainerSC, LinkSC, BoxForm, Title } from './signin.styled';
 import { loginUser } from '../../services/api/Requests/login';
 import { Button } from '../../components';
@@ -14,11 +14,13 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
   const [validated, setValidated] = useState(false);
+  const [loading, setLloading] = useState(false);
   const [values, setValues] = useState<UserLogin>({} as UserLogin);
   const { setUser } = userHook();
   
   const handleSubmit = async(e: any) => {
     e.preventDefault();
+    setLloading(true);
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.stopPropagation();
@@ -72,7 +74,16 @@ const SignIn = () => {
                     type='submit'
                     bg={Theme.colors.yellow}
                     color="white"
-                    children = "Entrar"/>
+                    >
+                        {loading && <Spinner
+                          as="span"
+                          animation="grow"
+                          size="sm"
+                          role="status"
+                          aria-hidden="true"
+                        />}
+                      Entrar
+                      </Button>
                 </Form.Group>
                 <Col className="mt-3 d-grid text-center">
                   <Form.Label>
