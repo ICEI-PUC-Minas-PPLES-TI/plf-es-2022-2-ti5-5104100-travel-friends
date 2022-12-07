@@ -14,11 +14,9 @@ import theme from "../../../utils/theme";
 
 import { UserLogin } from "../../../@types/signOff.interface";
 
-export default function SignIn() {
+export default function SignIn({ navigation }: any) {
   const { setUser, userData } = userHook();
   const { login } = useAuth();
-
-  const navigation = useInitialNavigation();
 
   const [message, setMessage] = useState<string>("");
   const [userLogin, setUserLogin] = useState<UserLogin>({} as UserLogin);

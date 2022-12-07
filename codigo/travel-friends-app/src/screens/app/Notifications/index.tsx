@@ -46,9 +46,6 @@ export default function Notifications() {
         </View>
 
         <View style={{ width: "100%" }}>
-          {notificatioList.length === 0 ? (
-            <ActivityIndicator color={theme.colors.primary} size="large" />
-          ) : null}
           {!!notificatioList ? (
             <FlatList
               snapToAlignment={"start"}

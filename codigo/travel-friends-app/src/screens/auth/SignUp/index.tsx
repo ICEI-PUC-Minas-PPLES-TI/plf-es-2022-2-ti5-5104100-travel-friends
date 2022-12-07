@@ -9,7 +9,7 @@ import {
 import { UserRegister } from "../../../@types/signOff.interface";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
-import { useInitialNavigation } from "../../../hooks/navigation";
+
 import { createUser } from "../../../services/api/auth/login";
 import HeaderGoback from "../../../components/HeaderGoback";
 
@@ -18,9 +18,7 @@ import theme from "../../../utils/theme";
 
 //TODO: validar os campos vazios da aplicação
 
-export default function SignUp() {
-  const navigation = useInitialNavigation();
-
+export default function SignUp({ navigation }: any) {
   const [userRegister, setUserRegister] = useState<UserRegister>(
     {} as UserRegister
   );

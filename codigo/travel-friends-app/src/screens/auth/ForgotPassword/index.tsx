@@ -10,9 +10,7 @@ import theme from "../../../utils/theme";
 
 import { styles } from "./styles";
 
-export default function ForgotPassword() {
-  const navigation = useInitialNavigation();
-
+export default function ForgotPassword({ navigation }: any) {
   const [message, setMessage] = useState<string>("");
   const [userLogin, setUserLogin] = useState<UserLogin>({} as UserLogin);
   const [isError, setIsError] = useState<boolean>(false);
