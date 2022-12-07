@@ -20,7 +20,7 @@ interface ContextData {
   generateNotification: () => void;
   clearNotification: () => void;
   startGeneration: () => void;
-  inRoadmapNotification: () => void;
+  inRoadmapNotification: (title: RoadMap["title"]) => void;
 }
 
 const NotificationContext = createContext<ContextData>({} as ContextData);
@@ -61,7 +61,7 @@ export function NotificationProvider({ children }: ProviderProps) {
   }
 
   function startGeneration() {
-    setInterval(() => generateNotification(), 100000);
+    setInterval(() => generateNotification(), 30000);
   }
 
   function clearNotification() {

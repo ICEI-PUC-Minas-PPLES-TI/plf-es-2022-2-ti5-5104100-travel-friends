@@ -60,7 +60,7 @@ export default function Home() {
     startGeneration();
   }, []);
 
-  setInterval(() => setCout(count + 1), 50000);
+  setInterval(() => setCout(count + 1), 60000);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.primary }}>
