@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "jest --coverage --runInBand --no-cache --detectOpenHandles",
     "eject": "react-scripts eject",
     "clean": "cache clean"
   },

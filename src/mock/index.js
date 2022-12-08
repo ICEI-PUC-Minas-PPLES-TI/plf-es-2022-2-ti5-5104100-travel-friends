@@ -53,3 +53,12 @@ export const CREATE_ROADMAP_MOCK = {
       }
   ]
 };
+
+export const UPDATE_ROADMAP_MOCK = {
+    "isFree": false,
+}
+
+export const USER = {
+    "email": "admin@gmail.com",
+    "password": "admin",
+}

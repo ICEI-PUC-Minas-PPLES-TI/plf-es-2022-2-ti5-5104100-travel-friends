@@ -8,6 +8,7 @@ import logo from '../../assets/logo-app.png';
 import { Theme } from '../../utils';
 import { UserRegister } from '../../@types/models.interface';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const ResetPassword = () => {
   const [messageSuccess, setMessageSuccess] = useState(false);

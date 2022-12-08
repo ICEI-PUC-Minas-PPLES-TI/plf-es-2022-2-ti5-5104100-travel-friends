@@ -1,8 +1,3 @@
-export declare interface AuthUser {
-  data: User,
-  status: number
-}
-
 export type UserRegister = {
   name: string;
   email: string;

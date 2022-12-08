@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
-import { getAllRoadmap, createRoadmap } from '../../../services/api/Requests/roadmap';
-import { ROADMAP_MOCK, CREATE_ROADMAP_MOCK } from '../../../mock';
+import { getAllRoadmap, createRoadmap, updateRoadmap } from '../../../services/api/Requests/roadmap';
+import { ROADMAP_MOCK, CREATE_ROADMAP_MOCK, UPDATE_ROADMAP_MOCK } from '../../../mock';
 
-describe('', () => {
+describe('Teste de API Passeio', () => {
 
   it('deve retornar um dado específico', async () => {
     const data = await getAllRoadmap();
@@ -18,8 +18,22 @@ describe('', () => {
     }
   });
 
-  it('', async () => {
+  it('deve retornar dado de criação', async () => {
     const data = await createRoadmap(CREATE_ROADMAP_MOCK);
     expect(data.request).toBeTruthy();
-  })
+  });
+
+  it('deve retornar resposta de erro de para criação', async () => {
+    expect.assertions(0);
+    try {
+      await createRoadmap(CREATE_ROADMAP_MOCK);
+    } catch (e) {
+      expect(e).toMatch('error');
+    }
+  });
+
+  it('deve realizar a atualização do passeio', async () => {
+    const data = await updateRoadmap(UPDATE_ROADMAP_MOCK);
+    expect(data).toBeTruthy();
+  });
 });
