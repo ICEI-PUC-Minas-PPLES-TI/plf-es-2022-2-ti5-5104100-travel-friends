@@ -52,7 +52,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --coverage --runInBand --no-cache --detectOpenHandles",
+    "test": "jest --coverage --runInBand --no-cache",
     "eject": "react-scripts eject",
     "clean": "cache clean"
   },
