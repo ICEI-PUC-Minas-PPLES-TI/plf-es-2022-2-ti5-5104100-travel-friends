@@ -50,7 +50,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node index.tsx",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --coverage --runInBand --no-cache",
     "eject": "react-scripts eject",

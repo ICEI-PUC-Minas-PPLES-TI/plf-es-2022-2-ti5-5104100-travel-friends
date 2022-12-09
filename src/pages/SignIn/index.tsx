@@ -23,6 +23,7 @@ const SignIn = () => {
     setLloading(true);
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
+      setLloading(false);
       e.stopPropagation();
     }
     const {data, status} = await loginUser(values);
@@ -31,6 +32,7 @@ const SignIn = () => {
       navigate('/painel');
     }
     else{
+      setLloading(false);
       setMessage(data.error);
     }
     setValidated(true);
