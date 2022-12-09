@@ -1,6 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1670438012537" clover="3.2.0">
-  <project timestamp="1670438012538" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1670545851517" clover="3.2.0">
+  <project timestamp="1670545851517" name="All files">
+    <metrics statements="94" coveredstatements="74" conditionals="26" coveredconditionals="17" methods="34" coveredmethods="17" elements="154" coveredelements="108" complexity="0" loc="94" ncloc="94" packages="16" files="31" classes="31"/>
+    <package name="components.Button">
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Button\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="15" count="4" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="styles.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Button\styles.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Card">
+      <metrics statements="17" coveredstatements="11" conditionals="9" coveredconditionals="4" methods="5" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Card\index.tsx">
+        <metrics statements="15" coveredstatements="9" conditionals="9" coveredconditionals="4" methods="5" coveredmethods="1"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="102" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Card\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.CardInfo">
+      <metrics statements="9" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\CardInfo\index.tsx">
+        <metrics statements="7" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\CardInfo\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.CardNotification">
+      <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\CardNotification\index.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\CardNotification\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.ContainerDefault">
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\ContainerDefault\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="19" count="2" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\ContainerDefault\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Header">
+      <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Header\index.tsx">
+        <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Header\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.HeaderGoback">
+      <metrics statements="7" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\HeaderGoback\index.tsx">
+        <metrics statements="5" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\HeaderGoback\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Input">
+      <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Input\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="26" count="2" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Input\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.Text">
+      <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\components\Text\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="21" count="43" type="cond" truecount="2" falsecount="0"/>
+      </file>
+    </package>
+    <package name="database">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="notificationDB.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\database\notificationDB.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="hooks">
+      <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <file name="navigation.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\hooks\navigation.ts">
+        <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="13" count="10" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="screens.app.List">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\app\List\index.tsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\app\List\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="screens.app.Notifications">
+      <metrics statements="7" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\app\Notifications\index.tsx">
+        <metrics statements="5" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="1"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\app\Notifications\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="screens.app.Profile">
+      <metrics statements="11" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\app\Profile\index.tsx">
+        <metrics statements="9" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="57" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\app\Profile\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="screens.auth.Terms">
+      <metrics statements="4" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="index.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\auth\Terms\index.tsx">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+      </file>
+      <file name="styles.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\screens\auth\Terms\styles.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="formatDate.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\utils\formatDate.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+      </file>
+      <file name="formatNickName.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\utils\formatNickName.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="2" type="stmt"/>
+      </file>
+      <file name="testUtils.tsx" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\utils\testUtils.tsx">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="theme.ts" path="C:\Users\55319\Desktop\TIS05-travel\plf-es-2022-2-ti5-5104100-travel-friends\codigo\travel-friends-app\src\utils\theme.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="11" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

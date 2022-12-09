@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { Alert, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+
 import Button from "../../../components/Button";
 import TextApp from "../../../components/Text";
 import theme from "../../../utils/theme";

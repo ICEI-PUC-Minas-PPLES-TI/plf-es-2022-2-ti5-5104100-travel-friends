@@ -26,13 +26,13 @@ export function Profile() {
         <View style={styles.headerProfile}>
           <View style={styles.nickName}>
             <TextApp
-              text={formatNickName(userData.name)}
+              text={formatNickName("name")}
               size={24}
               color={theme.colors.shape}
             />
           </View>
           <View style={styles.underlineProfile}>
-            <TextApp text={userData.name} size={24} />
+            <TextApp text={"name"} size={24} />
           </View>
         </View>
         <View style={styles.bodyProfile}>

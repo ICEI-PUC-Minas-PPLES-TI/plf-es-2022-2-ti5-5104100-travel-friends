@@ -1,6 +1,8 @@
 node_modules/
+coverage/
 .expo/
 dist/
+*__snapshorts__/**
 npm-debug.*
 *.jks
 *.p8
