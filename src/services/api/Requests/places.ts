@@ -15,7 +15,7 @@ export const getAllPlaces = async() => {
 export const createPlace = async (data: any) => {
     try{
         const response = await api.post<IResponse>("/local", data);
-        return response.data;
+        return response;
     }catch(error){
         return error;
     }
@@ -24,7 +24,7 @@ export const createPlace = async (data: any) => {
 export const getPlace = async (idPlace: any) => {
     const url = `/local/${idPlace}`;
     try{
-        const response = await api.get(url);
+        const response = await api.get<IResponse>(url);
         return response.data;
     }catch(error){
         return error;
@@ -34,7 +34,7 @@ export const getPlace = async (idPlace: any) => {
 export const updatePlace = async(idPlace: any, data: any) => {
     const url = `/local/${idPlace}`;
     try{
-        const response = await api.patch(url, data);
+        const response = await api.patch<IResponse>(url, data);
         return response.data;
     }catch(error){
         return error;

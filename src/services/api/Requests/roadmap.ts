@@ -18,6 +18,6 @@ export const createRoadmap = async (data: RoadMap) => {
 
 export const updateRoadmap = async (data: any) => {
   const url = `/roadmap/${data.idCreator}`;
-  const response = await api.post<IResponse>(url, '');
+  const response = await api.patch<IResponse>(url, '');
 };
 

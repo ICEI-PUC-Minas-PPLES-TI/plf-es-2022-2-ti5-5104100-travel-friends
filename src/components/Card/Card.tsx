@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Card } from 'react-bootstrap';
-import BannerDefault from '../../assets/banner-default.svg';
+import BannerDefault from '../../assets/icons/banner-default.svg';
 import { Divider } from "../Divider/Divider.styled";
 import { RoadMap } from "../../@types/models.interface";
 

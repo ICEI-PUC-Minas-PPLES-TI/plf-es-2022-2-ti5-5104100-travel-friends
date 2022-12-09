@@ -1,9 +1,9 @@
 import api from "..";
-import { UserLogin, UserRegister, AuthUser } from "../../../@types/models.interface";
+import { UserLogin, UserRegister, IResponse } from "../../../@types/models.interface";
 
 export const loginUser = async (data: UserLogin) => {
     try {
-      const response = await api.post<AuthUser>('/auth/login', data);
+      const response = await api.post<IResponse>('/auth/login', data);
       return response;
   } catch (error) {
       return error.response;
@@ -13,7 +13,7 @@ export const loginUser = async (data: UserLogin) => {
 export const resetPassword = async (data: UserLogin) => {
   let url = `/user/${data.email}`;
   try {
-    const response = await api.patch<AuthUser>(url, {
+    const response = await api.patch<IResponse>(url, {
       password: data.password,
     });
     return response;
@@ -24,7 +24,7 @@ export const resetPassword = async (data: UserLogin) => {
 
 export const registerUser = async (data: UserRegister) => {
   try {
-    const response = await api.post<AuthUser>('/auth/register', data);
+    const response = await api.post<IResponse>('/auth/register', data);
     return response;
   } catch (error) {
       return error.response;

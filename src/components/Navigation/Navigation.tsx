@@ -4,6 +4,7 @@ import User from '../../assets/user-icon.svg';
 import { userHook } from '../../context/userData';
 import { useNavigate } from 'react-router-dom';
 import Chat from '../Chat/client';
+import React from 'react';
 
 const Navigation = ({ children }: any) => {
   const { userData } = userHook();
