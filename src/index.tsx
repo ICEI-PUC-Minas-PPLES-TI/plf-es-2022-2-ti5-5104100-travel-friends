@@ -1,17 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+const express = require('express');
 
-import AppRoutes from "./routes";
-import { UserProvider } from "./context/userData";
-import './index.css';
+const { resolve } = require('path')
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <UserProvider>
-      <AppRoutes />
-    </UserProvider>
-  </React.StrictMode>
-);
+const app = express();
+
+app.use('/', express.static(
+  resolve(
+    __dirname,
+    './build'
+  ),
+))
+
+app.listen(process.env.PORT || 3000,  (err) => {
+  if(err){
+    return console.log(err);
+  }
+})

@@ -1,11 +1,17 @@
 import React from "react";
+import ReactDOM from "react-dom/client";
 
-function App() {
-  return (
-    <div>
-      <h1>olá travel</h1>
-    </div>
-  );
-}
+import AppRoutes from "./routes";
+import { UserProvider } from "./context/userData";
+import './index.css';
 
-export default App;
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <UserProvider>
+      <AppRoutes />
+    </UserProvider>
+  </React.StrictMode>
+);
