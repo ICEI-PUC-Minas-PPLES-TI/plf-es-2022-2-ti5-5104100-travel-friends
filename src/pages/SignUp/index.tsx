@@ -3,11 +3,12 @@ import { Container, Row, Col,Form, Figure, Alert } from 'react-bootstrap';
 import { ContainerSC, BoxForm, Title } from './signUp.styled';
 import { registerUser } from '../../services/api/Requests/login';
 import { Button } from '../../components';
-import planet from '../../assets/icon-planet.svg';
-import logo from '../../assets/logo-app.png';
+import planet from '../../assets/icons/icon-planet.svg';
+import logo from '../../assets/icons/logo-app.png';
 import { useNavigate } from 'react-router-dom';
 import { Theme } from '../../utils';
 import { UserRegister } from '../../@types/models.interface';
+import React from 'react';
 
 const SignUp = () => {
   const [messageSuccess, setMessageSuccess] = useState(null);

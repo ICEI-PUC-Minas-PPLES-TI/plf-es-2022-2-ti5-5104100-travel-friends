@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col,Form, Figure, Alert, Spinner } from 'react-bootstrap';
 import { ContainerSC, LinkSC, BoxForm, Title } from './signin.styled';
 import { loginUser } from '../../services/api/Requests/login';
 import { Button } from '../../components';
 import { userHook } from '../../context/userData';
-import planet from '../../assets/icon-planet.svg';
-import logo from '../../assets/logo-app.png';
+import planet from '../../assets/icons/icon-planet.svg';
+import logo from '../../assets/icons/logo-app.png';
 import { Theme } from '../../utils';
 import { useNavigate } from 'react-router-dom';
 import { UserLogin } from '../../@types/models.interface';

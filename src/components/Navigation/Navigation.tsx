@@ -1,6 +1,6 @@
 import { Container, Col, Row, Figure, Nav, Form, Button, Navbar, Dropdown } from 'react-bootstrap';
-import LogoTipo from '../../assets/logo-web.png';
-import User from '../../assets/user-icon.svg';
+import LogoTipo from '../../assets/icons/logo-web.png';
+import User from '../../assets/icons/user-icon.svg';
 import { userHook } from '../../context/userData';
 import { useNavigate } from 'react-router-dom';
 import Chat from '../Chat/client';

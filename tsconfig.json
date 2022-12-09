@@ -3,7 +3,7 @@
       "jsx": "react",
       "baseUrl": "./",
       "paths": {
-          "src/*": ["src/*"],
+        //   "src/*": ["src/*"],
           "tests/*": ["__tests__/*"]
       },
       "target": "es6",
@@ -23,6 +23,6 @@
       "useCache": true,
       "useTranspileModule": true
   },
-  "include": ["src/**/*.tsx"],
+  "include": ["src/**/*.tsx", "src/@types/import-svg.d.ts"],
   "exclude": ["./node_modules/*"]
 }

@@ -5,10 +5,10 @@ import { Local } from '../../@types/models.interface';
 import InputTime from '../../components/InputTime/InputTime';
 import { deletePlace, getAllPlaces, getPlace } from '../../services/api/Requests/places';
 import { useEffect } from 'react';
-import astronaut from '../../assets/images/astronaut.jpg';
+import BannerPlaces from '../../assets/icons/banner-places.svg';
 import { RiDeleteBin6Line } from "@react-icons/all-files/ri/RiDeleteBin6Line";
 import { FiEdit3 } from "@react-icons/all-files/fi/FiEdit3";
-import BannerPlaces from '../../assets/banner-places.svg';
+import React from 'react';
 
 
 const Place = () => {
