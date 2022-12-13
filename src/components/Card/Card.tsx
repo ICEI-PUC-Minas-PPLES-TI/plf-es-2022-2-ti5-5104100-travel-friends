@@ -51,7 +51,6 @@ const CardBox: React.FC<Props> = ({
               </Row>
             </Card.Body>
             <Card.Footer>
-              {console.log(item.idCreator, userData.id)}
               <Button
                 type='submit'
                 bg={(item.idCreator !== userData.id) ? Theme.colors.primary : 'lightgray'}
