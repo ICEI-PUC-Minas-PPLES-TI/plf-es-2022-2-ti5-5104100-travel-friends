@@ -28,8 +28,8 @@ const SignUp = () => {
     if(status === 201){
       setMessageSuccess(data.message);
       setTimeout(() => {
-        navigate('/entrar');
-      }, 3000);
+        navigate('/');
+      }, 2000);
     }
     else{
       setMessage(data.error);

@@ -23,6 +23,6 @@
       "useCache": true,
       "useTranspileModule": true
   },
-  "include": ["src/**/*.tsx", "src/@types/import-svg.d.ts"],
+  "include": ["src/**/*.tsx", "src/@types/import-svg.d.ts", "src/PrivateRoute"],
   "exclude": ["./node_modules/*"]
 }

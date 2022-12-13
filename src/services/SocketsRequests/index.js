@@ -1,6 +1,7 @@
-import { io } from "socket.io-client";
+import clientSocket, { io } from "socket.io-client";
+import api from "../api";
 
-const appSocket = io("https://travel-friends-backend.herokuapp.com", {
+const appSocket = io.connect("https://ti5-mensageria.herokuapp.com", {
     reconnectionDelay: 1000,
     reconnection: true,
     reconnectionAttemps: 10,
@@ -9,5 +10,12 @@ const appSocket = io("https://travel-friends-backend.herokuapp.com", {
     upgrade: false,
     rejectUnauthorized: false
 });
+
+export const subscribe = (newCallback) => {
+    api.on("inscricao", (result) => {
+      result = JSON.parse(result);
+      newCallback(result);
+    });
+  }
 
 export default appSocket;

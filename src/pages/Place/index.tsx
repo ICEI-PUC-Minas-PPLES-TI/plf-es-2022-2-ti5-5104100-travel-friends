@@ -1,48 +1,53 @@
-import { useState } from 'react';
+import { useState , useRef} from 'react';
 import { Divider, Navigation } from '../../components';
 import { Container, Row,Col, Form, Button, Card, Toast, ToastContainer, Modal } from 'react-bootstrap';
 import { Local } from '../../@types/models.interface';
 import InputTime from '../../components/InputTime/InputTime';
 import { deletePlace, getAllPlaces, getPlace } from '../../services/api/Requests/places';
 import { useEffect } from 'react';
-import BannerPlaces from '../../assets/icons/banner-places.svg';
+import BannerPlaces from '../../assets/icons/local.png';
 import { RiDeleteBin6Line } from "@react-icons/all-files/ri/RiDeleteBin6Line";
 import { FiEdit3 } from "@react-icons/all-files/fi/FiEdit3";
 import React from 'react';
+import { userHook } from 'src/context/userData';
+import Theme from '../../utils/theme';
 
 
 const Place = () => {
-
     const [show, setShow] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [placeEdit, setPlaceEdit] = useState<Local>({} as Local);
     const [message, setMessage] = useState('');
     const [places, setPlaces] = useState<Local[]>();
+    const updateLists = useRef(true);
+
+    const { userData } = userHook();
 
     useEffect(() => {
         async function loadPlaces () {
-            const resposta = await getAllPlaces();
-            setPlaces(resposta);
-            return resposta;
+            const { data } = await getAllPlaces();
+            setPlaces(data);
+            updateLists.current = true;
+            return data;
         }
         loadPlaces();
-      }, []);
+      }, [placeEdit, updateLists]);
       
       
-    const onEditPlace = async(id: any) => {
-        const item = await getPlace(id);
-        setPlaceEdit(item);
-        setShowModal(true);   
+    const onEditPlace = async(e, id: any) => {
+        e.preventDefault();
+        const { status, data } = await getPlace(id);
+        if(status === 200){
+            setPlaceEdit(data);
+            setShowModal(true);   
+        };
     }
         
         const onDeletePlace = async(id: any) => {
             const { data, status } = await deletePlace(id);
-            if(status === 200){
-                setPlaces(data);
+            if(status === 200 && updateLists.current){
                 setMessage(data.message);
                 setShow(true);
-                const newData = places?.filter((item) => item._id !== id);
-                setPlaces(newData);
             }else{
                 setMessage(data.message);
             }
@@ -50,10 +55,16 @@ const Place = () => {
     
     const onUpdatePlace = (e: any) => {
         e.preventDefault();
-        console.log(placeEdit);
     }
 
-    const ModalEdit = () => {
+    const editar = (e) => {
+        e.preventDefault();
+        placeEdit.name = e.target.value;
+        setPlaceEdit({...placeEdit});
+    }
+
+    const ModalEdit = (e) => {
+        // e.preventDefault();
         return(
             <Modal show={showModal}
                 onHide={() => setShowModal(false)}
@@ -69,10 +80,7 @@ const Place = () => {
                 <Row className="mb-3">
                     <Form.Group as={Col}>
                         <Form.Label>Nome do local</Form.Label>
-                        <Form.Control type="text" value={placeEdit.name} onChange={e => {
-                            placeEdit.name = e.target.value;
-                            setPlaceEdit({...placeEdit});
-                        }} placeholder="Insira o nome do local" required/>
+                        <Form.Control type="text" value={placeEdit.name} onChange={e => editar(e)} placeholder="Insira o nome do local" required/>
                     </Form.Group>   
                 </Row>
 
@@ -138,9 +146,9 @@ const Place = () => {
             <Toast bg="warning" onClose={() => setShow(false)} show={show} delay={3000} autohide>
                 <Toast.Header>
                     <img
-                    src="holder.js/20x20?text=%20"
-                    className="rounded me-2"
-                    alt=""
+                        src="holder.js/20x20?text=%20"
+                        className="rounded me-2"
+                        alt=""
                     />
                     <strong className="me-auto">Notificação</strong>
                     <small>11 mins ago</small>
@@ -152,7 +160,7 @@ const Place = () => {
     
     return (
           <Navigation>
-            <ModalEdit />
+            {showModal && <ModalEdit />}
             <ToastContainer className="p-3" position='top-end'>
                 <ToastMessage />
             </ToastContainer>
@@ -161,19 +169,18 @@ const Place = () => {
                 {places?.map((item: any, idx: any) => (
                     <Col>
                     <Card tabIndex={idx} className="h-100" bg="light">
-                        <Container className='d-inline mt-2' style={{position: 'absolute', textAlign:'end' }}>
-                            <RiDeleteBin6Line onClick={() => onDeletePlace(item._id)} style={{cursor: 'pointer'}} color="#6C63FF" size={20} />
-                            <FiEdit3 style={{cursor: 'pointer'}} onClick={() => onEditPlace(item._id)} className='ms-2'color='#6C63FF'size={20}/>
-                        </Container>
-                        <Card.Img className='ps-3 pe-3 pt-3' variant="top" src={BannerPlaces} />
+                        {(userData.id === item.idCreator) && <Container className='d-inline mt-2' style={{position: 'absolute', textAlign:'end' }}>
+                            <RiDeleteBin6Line onClick={() => onDeletePlace(item._id)} style={{cursor: 'pointer'}} color="rgb(2 64 106)" size={20} />
+                            <FiEdit3 style={{cursor: 'pointer'}} onClick={(e) => onEditPlace(e, item._id)} className='ms-2'color='rgb(2 64 106)'size={20}/>
+                        </Container>}
+                        <Card.Img className='ps-3 pe-3 pt-3 w-50 align-self-center' variant="top" src={BannerPlaces} />
                         <Card.Body>
                         <Card.Title>{item.name}</Card.Title>
                             <Card.Text>{item.address}</Card.Text>
-                        {item.isFree && <Card.Text>Gratuito</Card.Text>}
                         <Card.Text>
-                            <Divider />
+                            <Divider color="#02406a" />
                         </Card.Text>
-                        <Card.Text className='small'>Funcionamento: {item.openTime} às {item.closeTime}</Card.Text>
+                        <Card.Text className='small'><strong>Funcionamento:</strong> {item.openTime} às {item.closeTime}</Card.Text>
                         </Card.Body>
                     </Card>
                     </Col>

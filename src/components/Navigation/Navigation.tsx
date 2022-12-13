@@ -1,4 +1,4 @@
-import { Container, Col, Row, Figure, Nav, Form, Button, Navbar, Dropdown } from 'react-bootstrap';
+import { Container, Col, Row, Figure, Nav, Navbar, Dropdown } from 'react-bootstrap';
 import LogoTipo from '../../assets/icons/logo-web.png';
 import User from '../../assets/icons/user-icon.svg';
 import { userHook } from '../../context/userData';
@@ -7,7 +7,7 @@ import Chat from '../Chat/client';
 import React from 'react';
 
 const Navigation = ({ children }: any) => {
-  const { userData } = userHook();
+  const { userData, setUser } = userHook();
   const navigate = useNavigate();
 
   const handleSelect = (e: any) => {
@@ -17,8 +17,16 @@ const Navigation = ({ children }: any) => {
     if(e === 'local'){
       navigate('/cadastrar-local');
     }
-    console.log(e);
   }
+
+  const handleNavegate = (path: string) => {
+    navigate(path);
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/');
+  };
 
     return (
       <Container className='h-100' fluid>
@@ -29,31 +37,20 @@ const Navigation = ({ children }: any) => {
             </Figure>
   
             <Nav defaultActiveKey="/painel" className="flex-column">
-              <Nav.Link href="/painel">Início</Nav.Link>
-              <Nav.Link href="/locais">Locais</Nav.Link>
-              <Nav.Link href='/entrar'>Sair</Nav.Link>
+              <Nav.Link onClick={() => handleNavegate("/painel")} style={{color: 'rgb(2 64 106)'}}>Início</Nav.Link>
+              <Nav.Link onClick={() => handleNavegate("/locais")} style={{color: 'rgb(2 64 106)'}}>Locais</Nav.Link>
+              <Nav.Link onClick={() => handleLogout()} style={{color: 'rgb(2 64 106)'}}>Sair</Nav.Link>
             </Nav>
           </Col>
   
           <Col sm={10}>
           <Navbar collapseOnSelect expand="lg">
             <Container>
-              <Navbar.Brand>
-                {/* <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Pesquisar roteiro"
-                    className="me-2"
-                    aria-label="Search"
-                  />
-                  <Button variant="outline-success">Pesquisar</Button>
-                </Form> */}
-              </Navbar.Brand>
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link href="/painel">Explorar</Nav.Link>
-                  <Nav.Link href="/locais">Meus roteiros</Nav.Link>
+                  <Nav.Link onClick={() => handleNavegate("/painel")}>Explorar</Nav.Link>
+                  <Nav.Link onClick={() => handleNavegate("/locais")}>Meus roteiros</Nav.Link>
                 </Nav>
                 <Nav className="me-5">
                   <Dropdown onSelect={(e) => handleSelect(e)}>
@@ -80,7 +77,7 @@ const Navigation = ({ children }: any) => {
               {children}
           </Col>
         </Row>
-        <Chat />
+        {/* <Chat /> */}
       </Container>
     );
 };

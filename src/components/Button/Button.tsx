@@ -6,6 +6,7 @@ interface Props {
   color: string;
   children?: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button: React.FC<Props> = ({ 
@@ -14,6 +15,7 @@ const Button: React.FC<Props> = ({
     color,
     children,
     onClick,
+    disabled
   }) => { 
   return (
     <button
@@ -27,6 +29,7 @@ const Button: React.FC<Props> = ({
             padding: '7px 16px',
             color
         }}
+        disabled={disabled}
     >
     {children}
     </button>

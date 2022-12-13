@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import io from 'socket.io-client';
+import appSocket from '../../services/SocketsRequests';
 import Chat from './Chat';
 import './styles.css';
-
-const socket = io.connect("https://ti5-mensageria.herokuapp.com")
 
 const ChatReal = () => {
   const [username, setUsername] = useState("");
@@ -13,7 +11,7 @@ const ChatReal = () => {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-      socket.emit("support", room);
+      appSocket.emit("support", room);
       setShowChat(true);
     }
   };
@@ -37,7 +35,7 @@ const ChatReal = () => {
           </Container>
         </div>
       ) : (
-        <Chat socket={socket} username={username} room={room} />
+        <Chat socket={appSocket} username={username} room={room} />
       )}
     </div>
   );
