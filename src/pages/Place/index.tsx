@@ -2,15 +2,14 @@ import { useState , useRef} from 'react';
 import { Divider, Navigation } from '../../components';
 import { Container, Row,Col, Form, Button, Card, Toast, ToastContainer, Modal } from 'react-bootstrap';
 import { Local } from '../../@types/models.interface';
-import InputTime from '../../components/InputTime/InputTime';
-import { deletePlace, getAllPlaces, getPlace } from '../../services/api/Requests/places';
+import { deletePlace, getAllPlaces } from '../../services/api/Requests/places';
 import { useEffect } from 'react';
 import BannerPlaces from '../../assets/icons/local.png';
 import { RiDeleteBin6Line } from "@react-icons/all-files/ri/RiDeleteBin6Line";
 import { FiEdit3 } from "@react-icons/all-files/fi/FiEdit3";
 import React from 'react';
 import { userHook } from 'src/context/userData';
-import Theme from '../../utils/theme';
+import { useNavigate } from 'react-router-dom';
 
 
 const Place = () => {
@@ -19,7 +18,7 @@ const Place = () => {
     const [placeEdit, setPlaceEdit] = useState<Local>({} as Local);
     const [message, setMessage] = useState('');
     const [places, setPlaces] = useState<Local[]>();
-    const updateLists = useRef(true);
+    const navigate = useNavigate();
 
     const { userData } = userHook();
 
@@ -27,119 +26,23 @@ const Place = () => {
         async function loadPlaces () {
             const { data } = await getAllPlaces();
             setPlaces(data);
-            updateLists.current = true;
             return data;
         }
         loadPlaces();
-      }, [placeEdit, updateLists]);
-      
-      
-    const onEditPlace = async(e, id: any) => {
-        e.preventDefault();
-        const { status, data } = await getPlace(id);
-        if(status === 200){
-            setPlaceEdit(data);
-            setShowModal(true);   
-        };
-    }
+      }, [placeEdit]);
         
         const onDeletePlace = async(id: any) => {
             const { data, status } = await deletePlace(id);
-            if(status === 200 && updateLists.current){
+            if(status === 200){
                 setMessage(data.message);
                 setShow(true);
+                
+            const response = await getAllPlaces();
+            setPlaces(response.data);
             }else{
                 setMessage(data.message);
             }
         }
-    
-    const onUpdatePlace = (e: any) => {
-        e.preventDefault();
-    }
-
-    const editar = (e) => {
-        e.preventDefault();
-        placeEdit.name = e.target.value;
-        setPlaceEdit({...placeEdit});
-    }
-
-    const ModalEdit = (e) => {
-        // e.preventDefault();
-        return(
-            <Modal show={showModal}
-                onHide={() => setShowModal(false)}
-                backdrop="static"
-                size='lg'
-                keyboard={false}
-                >
-                <Modal.Header closeButton>
-                <Modal.Title>Editar: {placeEdit.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <Form className='pe-5 ps-5'>
-                <Row className="mb-3">
-                    <Form.Group as={Col}>
-                        <Form.Label>Nome do local</Form.Label>
-                        <Form.Control type="text" value={placeEdit.name} onChange={e => editar(e)} placeholder="Insira o nome do local" required/>
-                    </Form.Group>   
-                </Row>
-
-                <Row className="mb-3">
-                    <Form.Group as={Col}>
-                        <Form.Label>CEP</Form.Label>
-                        <Form.Control type='tel' pattern="[0-9]{5}-[0-9]{2}" maxLength={8} value={placeEdit.cep} onChange={(e) => {
-                            placeEdit.cep = e.target.value;
-                            setPlaceEdit({...placeEdit});
-                        }} placeholder='Insira o CEP' required/>
-                    </Form.Group>
-
-                    <Form.Group as={Col}>
-                        <Form.Label>Endereço</Form.Label>
-                        <Form.Control value={placeEdit.address} onChange={(e) => {
-                            placeEdit.address = e.target.value;
-                            setPlaceEdit({...placeEdit});}} type="text" placeholder="Insira o logradouro"/>
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3">
-                    <Form.Group as={Col}>
-                        <Form.Label>Hora de abertura</Form.Label>
-                        <InputTime
-                            name="openTime"
-                            value={placeEdit.openTime}
-                            initTime='00:00'
-                            mountFocus={false}
-                            onTimeChange={(val) => {
-                                placeEdit.openTime = val;
-                                setPlaceEdit({...placeEdit});
-                            }}
-                        />
-                    </Form.Group>
-                    
-                    <Form.Group as={Col}>
-                        <Form.Label>Hora de fechamento</Form.Label>
-                        <InputTime
-                            name="closeTime"
-                            value={placeEdit.closeTime}
-                            initTime='00:00'
-                            mountFocus={false}
-                            onTimeChange={(val) => {
-                                placeEdit.closeTime = val;
-                                setPlaceEdit({...placeEdit});
-                            }}
-                        />
-                    </Form.Group>
-                </Row>
-            </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
-                    Cancelar
-                </Button>
-                <Button variant="primary" onClick={e => onUpdatePlace(e)}>Salvar</Button>
-                </Modal.Footer>
-            </Modal>
-        );
-    }
 
     const ToastMessage = () => {
         return(
@@ -160,19 +63,18 @@ const Place = () => {
     
     return (
           <Navigation>
-            {showModal && <ModalEdit />}
             <ToastContainer className="p-3" position='top-end'>
                 <ToastMessage />
             </ToastContainer>
             <Container className='p-5'>
             <Row xs={1} md={2} lg={3} className="g-4">
-                {places?.map((item: any, idx: any) => (
+                {places?.filter((item) => item.idCreator === userData.id).map((item, idx) => (
                     <Col>
                     <Card tabIndex={idx} className="h-100" bg="light">
-                        {(userData.id === item.idCreator) && <Container className='d-inline mt-2' style={{position: 'absolute', textAlign:'end' }}>
+                        <Container className='d-inline mt-2' style={{position: 'absolute', textAlign:'end' }}>
                             <RiDeleteBin6Line onClick={() => onDeletePlace(item._id)} style={{cursor: 'pointer'}} color="rgb(2 64 106)" size={20} />
-                            <FiEdit3 style={{cursor: 'pointer'}} onClick={(e) => onEditPlace(e, item._id)} className='ms-2'color='rgb(2 64 106)'size={20}/>
-                        </Container>}
+                            <FiEdit3 style={{cursor: 'pointer'}} onClick={() => navigate('/local/editar', { state: item })} className='ms-2'color='rgb(2 64 106)'size={20}/>
+                        </Container>
                         <Card.Img className='ps-3 pe-3 pt-3 w-50 align-self-center' variant="top" src={BannerPlaces} />
                         <Card.Body>
                         <Card.Title>{item.name}</Card.Title>

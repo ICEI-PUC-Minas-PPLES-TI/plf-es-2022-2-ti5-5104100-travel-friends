@@ -1,42 +1,30 @@
 import React, { useState } from 'react';
-import { Navigation } from '../../components';
+import { Navigation } from '../../../components';
 import { Container, Row,Col, Form, Button } from 'react-bootstrap';
-import { ILocation, Local } from '../../@types/models.interface';
-import { SearchCEP } from '../../utils/generalUtils';
-import InputTime from '../../components/InputTime/InputTime';
-import { userHook } from '../../context/userData';
-import { createPlace } from '../../services/api/Requests/places';
+import { Local } from '../../../@types/models.interface';
+import { SearchCEP } from '../../../utils/generalUtils';
+import InputTime from '../../../components/InputTime/InputTime';
+import { userHook } from '../../../context/userData';
+import { updatePlace } from '../../../services/api/Requests/places';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
-const FormPlace = () => {
-    const [values, setValues] = useState<Local>({} as Local);
+const EditPlace = () => {
+    const {state} = useLocation();
+    const [values, setValues] = useState<Local>(state);
     const [number, setNumber] = useState('');
+    const [address, setAddress] = useState();
     const [endereco, setEndereco] = useState("");
-    const [location, setLocation] = useState<ILocation>({} as ILocation);
-    const [address, setAddress] = useState({
-        cep: '',
-        logradouro: '',
-        complemento: '',
-        bairro: '',
-        localidade: '',
-        uf: '',
-        ibge: '',
-        gia: '',
-        ddd: '',
-        siafi: ''
-    });
     const [validated, setValidated] = useState(false);
-  
     const { userData } = userHook();
-
+    const navigate = useNavigate();
+    
     const onSubmit = async(e:any) => {
         e.preventDefault();
         values.address = `${number}, ${endereco}`;
-        values.idCriador = userData.id;
-        values.location = location;
+        values.idCreator = userData.id;
         setValues({...values});
-        console.log(values);
-        const res = await createPlace(values);
+        const res = await updatePlace(values._id, values);
     }
 
     const handleAddress = async(value: any) => {
@@ -47,10 +35,9 @@ const FormPlace = () => {
             setEndereco(stringData);
         }
     }
-
     
     return (
-      <Navigation className="d-flex">
+        <Navigation className="d-flex">
         <Container className='p-5 justify-content-center align-self-center'>
             <Form noValidate validated={validated} onSubmit={(e) => onSubmit(e)} className='pe-5 ps-5'>
                 <Row className="mb-3">
@@ -109,28 +96,24 @@ const FormPlace = () => {
                                 setValues({...values});
                             }}
                         />
-                    </Form.Group>
-                    <Form.Group as={Col} className="mb-3">
-                    <Form.Label>Latitude</Form.Label>
-                    <Form.Control value={location.lat} onChange={(e) => { 
-                        location.lat = e.target.value;
-                        setLocation({...location})}} maxLength={11} type='tel' placeholder="-xx.xxxxxxx" required/>
-                    </Form.Group>
-                    <Form.Group as={Col} className="mb-3">
-                        <Form.Label>Longitude</Form.Label>
-                        <Form.Control value={location.lng}  onChange={(e) => { 
-                            location.lng = e.target.value;
-                            setLocation({...location}) }} maxLength={11} type='text' placeholder="-xx.xxxxxxx" required/>
-                    </Form.Group>
-                    
+                    </Form.Group>        
                 </Row>
-                <Button variant="success" type="submit">
-                    Cadastrar Localidade
+                <Row>
+                    <Col md={4}>
+                <Button variant="light" type="reset" onClick={() => navigate('/locais')}>
+                    Cancelar
                 </Button>
+                    </Col>
+                    <Col md={4}>
+                <Button variant="success" type="submit">
+                    Salvar
+                </Button>
+                    </Col>
+                </Row>
             </Form>
         </Container>
-      </Navigation>
+      </Navigation>      
     );
 }
 
-export default FormPlace;
+export default EditPlace;
