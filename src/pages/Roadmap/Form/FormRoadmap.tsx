@@ -11,7 +11,6 @@ const FormRoadmap = () => {
     const [values, setValues] = useState<RoadMap>({} as RoadMap);
     const [validated, setValidated] = useState(false);
     const [places, setPlaces] = useState<Local[]>([]);
-    const [selectOption,setSelectOption] = useState<string[]>();
 
     const TypeR: TRoadmaps = {
         restaurante: 'restaurante',

@@ -25,12 +25,12 @@ export interface User {
   }
   
   export interface RoadMap {
-    _id?: string;
     idCreator?: string;
     idLocal: string;
     title: string;
     description?: string;
     isFree: boolean;
+    favorites: boolean | false;
     price: number | null;
     type: string;
     person: number;
@@ -41,7 +41,8 @@ export interface User {
         idUser: string;
         _id: string;
       }
-    ] | null;
+    ] | [];
+    _id?: string;
   }
   
   export interface Local {
@@ -52,14 +53,12 @@ export interface User {
     cep: string;
     openTime: string;
     closeTime: string;
-    location: ILocation;
+    location: {
+      lat: number;
+      lng: number;
+    }
+    __v: number | 0;
   }
-
-  export interface ILocation {
-    lat: string;
-    lng: string;
-  }
-
 
   export interface TRoadmaps {
     restaurante: string;

@@ -1,6 +1,6 @@
-import { useState , useRef} from 'react';
+import { useState } from 'react';
 import { Divider, Navigation } from '../../components';
-import { Container, Row,Col, Form, Button, Card, Toast, ToastContainer, Modal } from 'react-bootstrap';
+import { Container, Row,Col, Card, Toast, ToastContainer } from 'react-bootstrap';
 import { Local } from '../../@types/models.interface';
 import { deletePlace, getAllPlaces } from '../../services/api/Requests/places';
 import { useEffect } from 'react';
@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Place = () => {
     const [show, setShow] = useState(false);
-    const [showModal, setShowModal] = useState(false);
     const [placeEdit, setPlaceEdit] = useState<Local>({} as Local);
     const [message, setMessage] = useState('');
     const [places, setPlaces] = useState<Local[]>();
