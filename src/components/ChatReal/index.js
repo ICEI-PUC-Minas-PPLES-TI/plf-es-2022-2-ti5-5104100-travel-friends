@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import appSocket from '../../services/SocketsRequests';
+import { appSocket } from '../../services/SocketsRequests';
 import Chat from './Chat';
 import './styles.css';
 

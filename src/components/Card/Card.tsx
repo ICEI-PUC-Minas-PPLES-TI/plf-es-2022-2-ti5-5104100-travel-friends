@@ -1,11 +1,10 @@
-import React from "react";
-import { Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Row, Col, Card, Container } from 'react-bootstrap';
 import BannerDefault from '../../assets/icons/banner-default.svg';
 import { Divider } from "../Divider/Divider.styled";
 import { RoadMap } from "../../@types/models.interface";
-import Button from "../Button/Button";
-import { Theme } from '../../utils';
-import { userHook } from "src/context/userData";
+import { RiDeleteBin6Line } from "@react-icons/all-files/ri/RiDeleteBin6Line";
+import { deleteRoadmap, getAllRoadmap } from "src/services/api/Requests/roadmap";
 
 interface Props {
     data?: RoadMap[];
@@ -24,13 +23,28 @@ const CardBox: React.FC<Props> = ({
     divider,
     onClick,
   }) => { 
-    const { userData } = userHook();
+    const [message, setMessage] = useState('');
+    const [roadmaps,setRoadmaps] = useState(data);
+
+    const onDeleteRoadmap = async(id: any) => {
+      const { data, status } = await deleteRoadmap(id);
+      if(status === 200){
+          const res = await getAllRoadmap();
+          setRoadmaps(res);
+          setMessage(data.message);
+      }else{
+          setMessage(data.message);
+      }
+  }
 
   return (
     <Row xs={1} md={2} lg={3} className="g-4">
-      {data?.map((item, idx) => (
+      {roadmaps?.map((item, idx) => (
         <Col>
-          <Card tabIndex={idx} className="h-100" style={{backgroundColor: 'fbfbfb'}} >
+          <Card tabIndex={idx} className="h-100" style={{backgroundColor: 'fbfbfb'}}>
+            <Container className='d-inline mt-2' style={{position: 'absolute', textAlign:'end' }}>
+                <RiDeleteBin6Line onClick={() => onDeleteRoadmap(item._id)} style={{cursor: 'pointer'}} color="rgb(2 64 106)" size={20} />
+             </Container>
             <Card.Img className="p-5" variant="top" src={BannerDefault} />
             <Card.Body>
               <Card.Title>{item.title}</Card.Title>
@@ -50,14 +64,6 @@ const CardBox: React.FC<Props> = ({
                 <Col><p className="text-right">{item.participants.length}/{item.person}</p></Col>
               </Row>
             </Card.Body>
-            <Card.Footer>
-              <Button
-                type='submit'
-                bg={(item.idCreator !== userData.id) ? Theme.colors.primary : 'lightgray'}
-                color="white"
-                disabled={item.idCreator === userData.id}
-              >Inscrever</Button>
-            </Card.Footer>
           </Card>
         </Col>
       ))}

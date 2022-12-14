@@ -46,7 +46,7 @@ export interface User {
   
   export interface Local {
     _id?: string;
-    idCriador: string;
+    idCreator: string;
     name: string;
     address: string;
     cep: string;

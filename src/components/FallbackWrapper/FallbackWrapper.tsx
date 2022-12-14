@@ -2,11 +2,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Spinner from 'react-bootstrap/Spinner';
-
-// import DefaultEmpty from '../DefaultEmpty/DefaultEmpty';
-// import Loading from '../Loading/Loading';
-// import LoadingModal from '../LoadingModal/LoadingModal';
-// import DefaultError from '../DefaultError/DefaultError';
 import { Theme } from '../../utils';
 
 interface IFallbackWrapperProps {

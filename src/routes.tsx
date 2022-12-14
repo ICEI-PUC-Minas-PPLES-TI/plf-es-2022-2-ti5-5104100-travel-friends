@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userHook } from "./context/userData";
 import PrivateRoute from './PrivateRoute';
 import Home from "./pages/Home";
@@ -8,7 +8,9 @@ import Roadmap from "./pages/Roadmap";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Place from './pages/Place';
-import FormPlace from "./pages/Place/FormPlace";
+import FormPlace from "./pages/Place/Form/FormPlace";
+import FormRoadmap from './pages/Roadmap/Form/FormRoadmap';
+import EditPlace from './pages/Place/Form/EditPlace';
 
 function AppRoutes() {
   const { userData } = userHook();
@@ -34,14 +36,24 @@ function AppRoutes() {
             <Place/>
           </PrivateRoute>
           } />
+            <Route path="/cadastrar-local" element={
+            <PrivateRoute>
+              <FormPlace />
+            </PrivateRoute>
+            } />
+            <Route path="/local/editar" element={
+              <PrivateRoute>
+                <EditPlace />
+              </PrivateRoute>
+            } />
           <Route path="/cadastrar-roteiro" element={
           <PrivateRoute>
-            <Roadmap />
+            <FormRoadmap />
           </PrivateRoute>
           } />
-          <Route path="/cadastrar-local" element={
+          <Route path="/passeios" element={
           <PrivateRoute>
-            <FormPlace />
+            <Roadmap />
           </PrivateRoute>
           } />
       </Routes>

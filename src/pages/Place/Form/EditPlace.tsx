@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigation } from '../../../components';
 import { Container, Row,Col, Form, Button } from 'react-bootstrap';
-import { Local } from '../../../@types/models.interface';
+import { ILocation, Local } from '../../../@types/models.interface';
 import { SearchCEP } from '../../../utils/generalUtils';
 import InputTime from '../../../components/InputTime/InputTime';
 import { userHook } from '../../../context/userData';
@@ -12,6 +12,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const EditPlace = () => {
     const {state} = useLocation();
     const [values, setValues] = useState<Local>(state);
+    const [location, setLocation] = useState<ILocation>({
+        lat: state.lat,
+        lng: state.lng
+    } as ILocation);
     const [number, setNumber] = useState('');
     const [address, setAddress] = useState();
     const [endereco, setEndereco] = useState("");
@@ -24,7 +28,7 @@ const EditPlace = () => {
         values.address = `${number}, ${endereco}`;
         values.idCreator = userData.id;
         setValues({...values});
-        const res = await updatePlace(values._id, values);
+        await updatePlace(values._id, values);
     }
 
     const handleAddress = async(value: any) => {
@@ -96,6 +100,18 @@ const EditPlace = () => {
                                 setValues({...values});
                             }}
                         />
+                    </Form.Group>
+                    <Form.Group as={Col} className="mb-3">
+                    <Form.Label>Latitude</Form.Label>
+                    <Form.Control value={location.lat} onChange={(e) => { 
+                        location.lat = e.target.value;
+                        setLocation({...location})}} maxLength={11} type='tel' placeholder="-xx.xxxxxxx" required/>
+                    </Form.Group>
+                    <Form.Group as={Col} className="mb-3">
+                        <Form.Label>Longitude</Form.Label>
+                        <Form.Control value={location.lng}  onChange={(e) => { 
+                            location.lng = e.target.value;
+                            setLocation({...location}) }} maxLength={11} type='text' placeholder="-xx.xxxxxxx" required/>
                     </Form.Group>        
                 </Row>
                 <Row>

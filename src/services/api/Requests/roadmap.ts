@@ -19,5 +19,11 @@ export const createRoadmap = async (data: RoadMap) => {
 export const updateRoadmap = async (data: any) => {
   const url = `/roadmap/${data.idCreator}`;
   const response = await api.patch<IResponse>(url, '');
+  return response;
 };
 
+export const deleteRoadmap = async (id: string) => {
+  const url = `/roadmap/${id}`;
+  const response = await api.delete<IResponse>(url);
+  return response;
+};

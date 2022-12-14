@@ -50,7 +50,8 @@ const Navigation = ({ children }: any) => {
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link onClick={() => handleNavegate("/painel")}>Explorar</Nav.Link>
-                  <Nav.Link onClick={() => handleNavegate("/locais")}>Meus roteiros</Nav.Link>
+                  <Nav.Link onClick={() => handleNavegate("/passeios")}>Meus roteiros</Nav.Link>
+                  <Nav.Link onClick={() => handleNavegate("/locais")}>Meus locais</Nav.Link>
                 </Nav>
                 <Nav className="me-5">
                   <Dropdown onSelect={(e) => handleSelect(e)}>

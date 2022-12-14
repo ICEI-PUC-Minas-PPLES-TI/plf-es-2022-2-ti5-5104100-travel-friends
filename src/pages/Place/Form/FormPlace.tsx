@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigation } from '../../../components';
 import { Container, Row,Col, Form, Button } from 'react-bootstrap';
-import { Local } from '../../../@types/models.interface';
+import { Local, ILocation } from '../../../@types/models.interface';
 import { SearchCEP } from '../../../utils/generalUtils';
 import InputTime from '../../../components/InputTime/InputTime';
 import { userHook } from '../../../context/userData';
@@ -11,6 +11,7 @@ import { createPlace } from '../../../services/api/Requests/places';
 const FormPlace = () => {
     const [values, setValues] = useState<Local>({} as Local);
     const [number, setNumber] = useState('');
+    const [location, setLocation] = useState<ILocation>({} as ILocation);
     const [endereco, setEndereco] = useState("");
     const [address, setAddress] = useState({
         cep: '',
@@ -32,6 +33,7 @@ const FormPlace = () => {
         e.preventDefault();
         values.address = `${number}, ${endereco}`;
         values.idCreator = userData.id;
+        values.location = location;
         setValues({...values});
         await createPlace(values);
     }
@@ -107,7 +109,7 @@ const FormPlace = () => {
                             }}
                         />
                     </Form.Group>
-                    {/* <Form.Group as={Col} className="mb-3">
+                    <Form.Group as={Col} className="mb-3">
                     <Form.Label>Latitude</Form.Label>
                     <Form.Control value={location.lat} onChange={(e) => { 
                         location.lat = e.target.value;
@@ -118,7 +120,7 @@ const FormPlace = () => {
                         <Form.Control value={location.lng}  onChange={(e) => { 
                             location.lng = e.target.value;
                             setLocation({...location}) }} maxLength={11} type='text' placeholder="-xx.xxxxxxx" required/>
-                    </Form.Group> */}
+                    </Form.Group>
                     
                 </Row>
                 <Button variant="success" type="submit">
