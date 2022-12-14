@@ -10,7 +10,7 @@ amqp.connect('amqps://kcxhzzfu:st4kIkVZpGgzrTtRqjkzK3Ews-97uo8v@hawk.rmq.cloudam
             throw error1;
         }
 
-        var queue = 'hello';
+        var queue = 'messaging-ti5';
 
         channel.assertQueue(queue, {
             durable: false
