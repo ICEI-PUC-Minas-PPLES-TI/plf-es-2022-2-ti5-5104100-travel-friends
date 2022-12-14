@@ -53,11 +53,13 @@ export interface User {
     cep: string;
     openTime: string;
     closeTime: string;
-    location: {
-      lat: number;
-      lng: number;
-    };
+    location: ILocation;
     __v: number | 0;
+  }
+
+  export interface ILocation {
+    lat: number;
+    lng: number;
   }
 
   export interface TRoadmaps {
