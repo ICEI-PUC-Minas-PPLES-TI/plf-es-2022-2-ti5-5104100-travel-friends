@@ -38,6 +38,8 @@ const FormRoadmap = () => {
     const onSubmit = async(e:any) => {
         e.preventDefault();   
         values.idCreator = userData.id;
+        values.favorites = false;
+        values.participants = [];
         setValues({...values});
         await createRoadmap(values);
     }

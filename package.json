@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cloudamqp/amqp-client": "^2.1.1",
     "@date-io/jalaali": "^2.16.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -18,6 +19,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/socket.io-client": "^3.0.0",
+    "amqplib": "^0.10.3",
     "antd": "^5.0.1",
     "axios": "^1.1.3",
     "bootstrap": "^5.2.2",
@@ -52,8 +54,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "react-scripts start",
+    "start": "node server.js --enable-source-maps",
+    "dev": "react-scripts start --enable-source-maps",
     "build": "react-scripts build",
     "test": "jest --coverage --runInBand --no-cache",
     "eject": "react-scripts eject",

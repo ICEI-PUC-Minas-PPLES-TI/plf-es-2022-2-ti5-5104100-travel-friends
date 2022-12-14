@@ -1,7 +1,14 @@
-import clientSocket, { io } from "socket.io-client";
-import api from "../api";
+import { io } from "socket.io-client";
 
-export const appSocket = io.connect("https://ti5-mensageria.herokuapp.com");
+export const appSocket = io("https://ti5-mensageria.herokuapp.com", {
+  reconnectionDelay: 1000,
+  reconnection: true,
+  reconnectionAttemps: 10,
+  transports: ['websocket'],
+  agent: false,
+  upgrade: false,
+  rejectUnauthorized: false
+});
 
 export const subscribe = (newCallback) => {
   appSocket.on("calc", (result) => {

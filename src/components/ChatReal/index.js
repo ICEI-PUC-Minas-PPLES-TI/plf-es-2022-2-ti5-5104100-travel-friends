@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
-import { appSocket } from '../../services/SocketsRequests';
+import { io } from "socket.io-client";
 import Chat from './Chat';
 import './styles.css';
+
+const appSocket = io.connect("https://ti5-chat.herokuapp.com", {
+  reconnectionDelay: 1000,
+  reconnection: true,
+  reconnectionAttemps: 10,
+  transports: ['websocket'],
+  agent: false,
+  upgrade: false,
+  rejectUnauthorized: false
+});
 
 const ChatReal = () => {
   const [username, setUsername] = useState("");

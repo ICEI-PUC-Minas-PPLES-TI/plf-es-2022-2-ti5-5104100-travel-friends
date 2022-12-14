@@ -78,7 +78,7 @@ const Navigation = ({ children }: any) => {
               {children}
           </Col>
         </Row>
-        {/* <Chat /> */}
+        <Chat />
       </Container>
     );
 };

@@ -56,7 +56,7 @@ export interface User {
     location: {
       lat: number;
       lng: number;
-    }
+    };
     __v: number | 0;
   }
 
