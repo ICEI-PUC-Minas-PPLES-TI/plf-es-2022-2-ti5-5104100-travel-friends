@@ -31,7 +31,7 @@ export interface User {
     title: string;
     description?: string;
     isFree: boolean;
-    price: number;
+    price: number | null;
     type: string;
     person: number;
     start: string;
@@ -41,7 +41,7 @@ export interface User {
         idUser: string;
         _id: string;
       }
-    ];
+    ] | null;
   }
   
   export interface Local {

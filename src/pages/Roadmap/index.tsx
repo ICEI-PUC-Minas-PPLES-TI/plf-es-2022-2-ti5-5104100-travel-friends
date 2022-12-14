@@ -1,163 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { Navigation } from '../../components';
-import { Container, Card, Row,Col, Form, Button, ListGroup, FormGroup } from 'react-bootstrap';
-import { Local, RoadMap, TRoadmaps } from '../../@types/models.interface';
-import InputTime from '../../components/InputTime/InputTime';
-import { BoxContent } from './roadmap.styled';
-import { getAllPlaces } from '../../services/api/Requests/places';
-import { userHook } from '../../context/userData';
-import { createRoadmap } from '../../services/api/Requests/roadmap';
+import { useCallback } from 'react';
+import { getAllRoadmap } from '../../services/api/Requests/roadmap';
+import { CardBox, FallbackWrapper, Navigation } from '../../components';
+import { usePromise } from '../../hooks';
+import { Container } from 'react-bootstrap';
+import React from 'react';
+import { userHook } from 'src/context/userData';
 
 const Roadmap = () => {
-    const [values, setValues] = useState<RoadMap>({} as RoadMap);
-    const [validated, setValidated] = useState(false);
-    const [places, setPlaces] = useState<Local[]>([]);
-    const [selectOption,setSelectOption] = useState<string[]>();
+  const { userData } = userHook(); 
 
-    const TypeR: TRoadmaps = {
-        restaurante: 'restaurante',
-        loja: 'loja',
-        museu: 'museu',
-        igreja: 'igreja',
-        praca: 'praca',
-        parque: 'parque',
-        shopping: 'shopping',
-        arLivre: 'arLivre',
-        educacao: 'educacao'
-    }
+  const getRoadMaps = useCallback(async () => {
+    return getAllRoadmap();
+  }, []);
 
-    useEffect(() => {
-        async function loadPlaces () {
-            const resposta = await getAllPlaces();
-            setPlaces(resposta);
-            return resposta;
-        }
-        loadPlaces();
-      }, []);
-    
-      const { userData } = userHook();
-  
-    const onSubmit = async(e:any) => {
-        e.preventDefault();   
-        values.idCreator = userData.id;
-        setValues({...values});
-        const { data, status } = await createRoadmap(values);
-    }
+  const { data, ...promiseStatus } = usePromise(getRoadMaps);
+
+  const renderContent = () => {
+    const meRoadmaps = data?.filter((item) => (item.idCreator === userData.id));
 
     return (
-      <Navigation className="d-flex">
-        <Container className='p-5 justify-content-center align-self-center'>
-            <Row>
-                <Col lg={8}>
-                <Form noValidate validated={validated} onSubmit={(e) => onSubmit(e)}>
-                    <Row className="mb-3">
-                        <Form.Group as={Col}>
-                            <Form.Label>Nome do Passeio</Form.Label>
-                            <Form.Control type="text" value={values.title} onChange={(e) => {values.title = e.target.value;
-                                setValues({...values});}} placeholder="Insira o nome do passeio" required/>
-                        </Form.Group>
-
-                        <Form.Group as={Col}>
-                            <Form.Label>Tipo do passeio</Form.Label>
-                            <Form.Select defaultValue="0" value={values.type} onChange={(e) => {
-                                values.type = e.target.value;
-                                setValues({...values});}} required>
-                                <option value="0">Escolha...</option>
-                                <option value={TypeR.restaurante}>Restaurante</option>
-                                <option value={TypeR.loja}>Loja</option>
-                                <option value={TypeR.museu}>Museu</option>
-                                <option value={TypeR.igreja}>Igreja</option>
-                                <option value={TypeR.parque}>Parque</option>
-                                <option value={TypeR.arLivre}>Ar Livre</option>
-                                <option value={TypeR.educacao}>Educação</option>
-                                <option value={TypeR.shopping}>Shopping</option>
-                            </Form.Select>
-                        </Form.Group>
-                         
-                    </Row>
-                        <Form.Group as={Col} className="mb-3">
-                            <Form.Label>Descrição</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={values.description} onChange={(e) => {
-                                values.description = e.target.value;
-                                setValues({...values});
-                            }} type="text" placeholder="Faça um breve resumo do passeio ..."/>
-                        </Form.Group>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} md={4}>
-                            <Form.Label>Quantidade de participantes</Form.Label>
-                            <Form.Control type='number' value={values.person} onChange={(e) => {
-                                values.person = Number(e.target.value);
-                                setValues({...values});
-                            }} placeholder='Exemplo: 10' required/>
-                        </Form.Group>
-
-                        <Form.Group as={Col} md={3} className='align-self-center'>
-                            <Form.Check 
-                                type="switch"
-                                className='text-success'
-                                checked={values.isFree}
-                                id="custom-switch"
-                                label="Gratuito"
-                                onChange={(e) => {
-                                    values.isFree = e.target.checked;
-                                    setValues({...values});
-                                }}
-                            />
-                        </Form.Group>
-                        {!values.isFree && <Form.Group as={Col}>
-                            <Form.Label>Preço</Form.Label>
-                            <Form.Control value={values.price} onChange={(e) => {
-                                values.price = Number(e.target.value);
-                                setValues({...values});
-                            }} type='text' placeholder="R$ 00,00" />
-                        </Form.Group>}
-                    </Row>
-                    <Row className="mb-3">
-                    <Form.Group as={Col}>
-                            <Form.Label>Hora de abertura</Form.Label>
-                            <InputTime
-                                        name="time"
-                                        value={values.start}
-                                        initTime='00:00'
-                                        onTimeChange={(val) => {
-                                            values.start = val;
-                                            setValues({ ...values });
-                                        } } 
-                           />
-                        </Form.Group>
-                        
-                        <Form.Group as={Col}>
-                            <Form.Label>Hora de fechamento</Form.Label>
-                            <InputTime
-                                name="time"
-                                value={values.end}
-                                initTime='00:00'
-                                onTimeChange={(val) => {
-                                    values.end = val;
-                                    setValues({...values});
-                                }} 
-                            />
-                        </Form.Group>
-                    </Row>
-                    {places && <FormGroup className='mb-3'>
-                        <Form.Label>Ponto de encontro</Form.Label>
-                        <Form.Select>
-                            {places?.map((item: Local) => { 
-                                return(
-                                    <option>{item.name} - {item.address}</option>
-                                );}
-                            )}
-                        </Form.Select>
-                    </FormGroup>}
-                    <Button variant="success" type="submit">
-                        Cadastrar Passeio
-                    </Button>
-                </Form>
-                </Col>
-            </Row>
+      <Navigation>
+        <Container className='p-5'>
+        <CardBox data={meRoadmaps} />
         </Container>
       </Navigation>
     );
+  };
+
+  return (
+    <FallbackWrapper
+      renderContent={renderContent}
+      {...promiseStatus}
+    />
+  );
 }
 
 export default Roadmap;
